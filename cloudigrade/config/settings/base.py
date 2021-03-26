@@ -504,7 +504,7 @@ SOURCES_ENABLE_DATA_MANAGEMENT_FROM_KAFKA = env.bool(
     "SOURCES_ENABLE_DATA_MANAGEMENT_FROM_KAFKA",
     default=True,
 )
-
+SOURCES_API_AVAILABILITY_TOPIC = env("SOURCES_API_AVAILABILITY_TOPIC", default="platform.sources.status")
 SOURCES_API_BASE_URL = env(
     "SOURCES_API_BASE_URL",
     default="http://sources-api.sources-ci.svc:8080",

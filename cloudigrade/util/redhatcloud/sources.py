@@ -7,6 +7,7 @@ import requests
 from django.conf import settings
 from django.utils.translation import gettext as _
 
+from util.celery import retriable_shared_task
 from util.exceptions import SourcesAPINotJsonContent, SourcesAPINotOkStatus
 from util.redhatcloud import identity
 
@@ -217,19 +218,24 @@ def notify_application_availability(
         )
         return
 
-    sources_api_base_url = settings.SOURCES_API_BASE_URL
-    sources_api_external_uri = settings.SOURCES_API_EXTERNAL_URI
-
-    url = (
-        f"{sources_api_base_url}/{sources_api_external_uri}"
-        f"applications/{application_id}/"
-    )
-
+    # sources_api_base_url = settings.SOURCES_API_BASE_URL
+    # sources_api_external_uri = settings.SOURCES_API_EXTERNAL_URI
+    source_api_availability_topic = settings.SOURCES_API_AVAILABILITY_TOPIC  # platform.sources.status
+    # url = (
+    #     f"{sources_api_base_url}/{sources_api_external_uri}"
+    #     f"applications/{application_id}/"
+    # )
     payload = {
-        "availability_status": availability_status,
-        "availability_status_error": availability_status_error,
+        "resource_type": "application",
+        "resource_id": application_id,
+        "status": availability_status,
+        "error": availability_status_error
     }
-
+    # payload = {
+    #     "availability_status": availability_status,
+    #     "availability_status_error": availability_status_error,
+    # }
+    #
     logger.info(
         _(
             "Setting the availability status for application "
@@ -238,25 +244,13 @@ def notify_application_availability(
         {"application_id": application_id, "status": availability_status},
     )
 
-    headers = identity.generate_http_identity_headers(account_number, is_org_admin=True)
-    response = requests.patch(url, headers=headers, data=json.dumps(payload))
+    # headers = identity.generate_http_identity_headers(account_number, is_org_admin=True)
+    # response = requests.patch(url, headers=headers, data=json.dumps(payload))
 
-    logger.debug(
-        _("Notify sources response: %(code)s - %(response)s"),
-        {"code": response.status_code, "response": response.content},
-    )
 
-    if response.status_code == http.HTTPStatus.NOT_FOUND:
-        logger.info(
-            _(
-                "Cannot update availability status, application id "
-                "%(application_id)s not found."
-            ),
-            {"application_id": application_id},
-        )
-    elif response.status_code != http.HTTPStatus.NO_CONTENT:
-        message = _(
-            "Unexpected status {status} updating application "
-            "{application_id} status at {url}"
-        ).format(status=response.status_code, application_id=application_id, url=url)
-        raise SourcesAPINotOkStatus(message)
+@retriable_shared_task(
+    autoretry_for=(RequestException, BaseHTTPError, AwsThrottlingException),
+    name="util.redhatcloud.sources.notify_sources_kafka",
+)
+def notify_sources_kafka(payload, headers):
+    pass
