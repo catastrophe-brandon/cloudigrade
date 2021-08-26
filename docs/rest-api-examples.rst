@@ -80,7 +80,7 @@ Response:
 
     HTTP/1.1 200 OK
     Allow: GET, HEAD, OPTIONS
-    Content-Length: 1163
+    Content-Length: 1241
     Content-Type: application/json
     Referrer-Policy: same-origin
     X-CLOUDIGRADE-REQUEST-ID: 84c299fd-13bf-4de7-8134-4a89e6996ad3
@@ -103,6 +103,7 @@ Response:
                 "is_enabled": true,
                 "name": "greatest account ever",
                 "platform_application_id": 6890,
+                "platform_application_is_paused": false,
                 "platform_authentication_id": 6311,
                 "platform_source_id": 663,
                 "updated_at": "2020-05-18T13:51:59.722367Z",
@@ -122,6 +123,7 @@ Response:
                 "is_enabled": true,
                 "name": "meh account",
                 "platform_application_id": 8376,
+                "platform_application_is_paused": false,
                 "platform_authentication_id": 4242,
                 "platform_source_id": 7961,
                 "updated_at": "2020-05-18T13:51:59.722367Z",
@@ -155,7 +157,7 @@ Response:
 
     HTTP/1.1 200 OK
     Allow: GET, HEAD, OPTIONS
-    Content-Length: 488
+    Content-Length: 527
     Content-Type: application/json
     Referrer-Policy: same-origin
     X-CLOUDIGRADE-REQUEST-ID: f87bd8ca-f863-4b96-bbd9-ddcc05a8e200
@@ -176,6 +178,7 @@ Response:
         "is_enabled": true,
         "name": "greatest account ever",
         "platform_application_id": 6890,
+        "platform_application_is_paused": false,
         "platform_authentication_id": 6311,
         "platform_source_id": 663,
         "updated_at": "2020-05-18T13:51:59.722367Z",
@@ -2246,7 +2249,7 @@ Response:
 
     HTTP/1.1 201 Created
     Allow: GET, POST, HEAD, OPTIONS
-    Content-Length: 501
+    Content-Length: 540
     Content-Type: application/json
     Referrer-Policy: same-origin
     X-CLOUDIGRADE-REQUEST-ID: f5aefbcf-1f84-4cc9-be30-09c864715fc1
@@ -2267,6 +2270,7 @@ Response:
         "is_enabled": true,
         "name": "yet another account",
         "platform_application_id": 4104,
+        "platform_application_is_paused": false,
         "platform_authentication_id": 1553,
         "platform_source_id": 8725,
         "updated_at": "2020-05-18T13:51:59.722367Z",
@@ -2331,7 +2335,7 @@ Response:
 
     HTTP/1.1 201 Created
     Allow: GET, POST, HEAD, OPTIONS
-    Content-Length: 515
+    Content-Length: 554
     Content-Type: application/json
     Referrer-Policy: same-origin
     X-CLOUDIGRADE-REQUEST-ID: 53b84014-5a12-4f5b-b107-58592d02d4f9
@@ -2352,6 +2356,7 @@ Response:
         "is_enabled": true,
         "name": "it's an azure account",
         "platform_application_id": 5180,
+        "platform_application_is_paused": false,
         "platform_authentication_id": 7113,
         "platform_source_id": 3350,
         "updated_at": "2020-05-18T13:51:59.722367Z",
