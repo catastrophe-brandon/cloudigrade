@@ -9,28 +9,28 @@ apps:
     - name: cloudigrade
       host: {{ cloudigrade_deployment_host }}
       repo: {{ cloudigrade_deployment_repo }}
-      path: deployment/clowdapp.yaml
+      path: deployment/clowdapp.yml
 - name: postigrade
   components:
     - name: postigrade
       host: {{ postigrade_deployment_host }}
       repo: {{ postigrade_deployment_repo }}
-      path: deployment/clowdapp.yaml
+      path: deployment/clowdapp.yml
 - name: sources-api
   components:
     - name: sources-api
       host: github
       repo: RedHatInsights/sources-api
-      path: deploy/clowdapp.yaml 
+      path: deploy/clowdapp.yml
 - name: sources-monitor
   components:
     - name: sources-monitor
       host: github
       repo: RedHatInsights/sources-monitor
-      path: deploy/clowdapp.yaml 
+      path: deploy/clowdapp.yml
 - name: sources-superkey-worker
   components:
     - name: sources-superkey-worker
       host: github
       repo: RedHatInsights/sources-superkey-worker
-      path: deploy/clowdapp.yaml 
+      path: deploy/clowdapp.yml
